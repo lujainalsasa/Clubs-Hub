@@ -1,0 +1,83 @@
+﻿@model FinalPro.Models.Club
+@{
+    List<Student> students = new List<Student>();
+    @foreach (var item in Model.Contests)
+    {
+        if (!students.Contains(item.Student))
+        {
+            students.Add(item.Student);
+        }
+    }
+}
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ClubId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+@if (students.Count == 0)
+{
+    <h3>This Club Has No Student</h3>
+}
+else {
+<br />
+<h3>@ViewData["SubTitle"]</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="@students!.FirstOrDefault()!.FirstName" class="form-label"></label>
+
+            </th>
+            <th>
+                <label asp-for="@students!.FirstOrDefault()!.LastName" class="form-label"></label>
+            </th>
+            <th>
+                <label asp-for="@students!.FirstOrDefault()!.EducationLevel" class="form-label"></label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in students)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EducationLevel)
+                </td>
+                <td>
+                    <a asp-controller="Students"  asp-action="Details" asp-route-id="@item.StudentId">Details</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        
+        <th colspan="4">
+            Total Number Of Students @(students != null ? students.Count() : 0)
+        </th>
+    </tfoot>
+</table>
+}

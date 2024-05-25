@@ -1,0 +1,87 @@
+﻿@model FinalPro.Models.Student
+@{
+    List<Club> clubs = new List<Club>();
+    @foreach (var item in Model.Contests)
+    {
+        if (!clubs.Contains(item.Club))
+        {
+            clubs.Add(item.Club);  
+        }
+    }
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div>
+
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EducationLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EducationLevel)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.StudentId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+@if(clubs.Count == 0)
+{
+    <h3>This Student Does Not Belong To Any Club</h3>
+}
+else{
+    <br />
+    <h3>@ViewData["SubTitle"]</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="@clubs!.FirstOrDefault()!.Name" class="form-label"></label>
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in clubs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-controller="Clubs" asp-action="Details" asp-route-id="@item.ClubId">Details</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

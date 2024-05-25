@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FinalPro.Models.Club>
+@{
+    List<String> imgURL = new List<String>
+    { "https://media.geeksforgeeks.org/wp-content/uploads/20230426115225/computer-image-660.jpg",
+        "https://images.unsplash.com/photo-1587831990711-23ca6441447b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVza3RvcCUyMGNvbXB1dGVyfGVufDB8fDB8fHww",
+        "https://www.techdonut.co.uk/sites/default/files/what-look-business-computer_285619112_0.jpg",
+        "https://w0.peakpx.com/wallpaper/57/1006/HD-wallpaper-notebook-pinterest-working-business-wireless-smartphone-technology.jpg",
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.i-tea.com.my%2F&psig=AOvVaw1Y3836GPULRw1VPP4V1gvD&ust=1716742314968000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiGtdChqYYDFQAAAAAdAAAAABAR",
+
+    };
+    int i = 0;
+}
+<h1>@ViewData["Title"]</h1>
+<hr />
+<p>
+    <a asp-action="Index">Back</a>
+</p>
+<div class="container">
+    <div class="row ">
+        @if (Model == null || Model.Count() == 0)
+        {
+            <p>There is No Clubs</p>
+        }
+        else
+        {        @foreach (var club in Model)
+            {
+
+                <div class="col-lg-3 px-5 ml-4" style="padding:10px">
+                    <div class="card" style="width: 18rem;">
+                        <img src=@imgURL[i] style="width:286px; height :161px;" class="card-img-top" alt="...">
+                        <div class="card-body ">
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => club.Name)</h5>
+                            <p class="card-text">
+
+                            </p>
+                            <a asp-action="Details" asp-route-id="@club.ClubId" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                    <div style="width: 20rem;">
+                    </div>
+                </div>
+                i++;
+                if (i == imgURL.Count()) i = 0;
+            }
+        }
+    </div>
+</div>

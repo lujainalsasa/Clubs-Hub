@@ -1,0 +1,58 @@
+﻿@model FinalPro.Models.ViewModels.SearchClub
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="FindBy">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClubName" class="control-label"></label>
+                <input asp-for="ClubName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label asp-for="@Model.Clubs!.FirstOrDefault()!.Name"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.Clubs!.FirstOrDefault()!.StartDate"></label>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Clubs)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ClubId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ClubId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ClubId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

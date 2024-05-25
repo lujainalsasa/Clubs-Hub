@@ -1,0 +1,96 @@
+﻿@model FinalPro.Models.Student
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-controller="Contests" asp-action="Index" asp-route-sortBy="@ViewData["SortBy"]">
+                    <label asp-for="@Model.Contests!.FirstOrDefault()!.Name" class="form-label"></label>
+                </a>
+            </th>
+            <th>
+                <label asp-for="@Model.Contests!.FirstOrDefault()!.Description" class="form-label"></label>
+
+            </th>
+            <th>
+                <label asp-for="@Model.Contests!.FirstOrDefault()!.Role" class="form-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.Contests!.FirstOrDefault()!.Club" class="form-label"></label>
+            </th>
+            </th>
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Club.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ContestId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ContestId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ContestId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h3>@ViewData["SubTitle"]</h3>
+<hr />
+
+
+<div>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EducationLevel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EducationLevel)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.StudentId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
